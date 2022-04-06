@@ -1,0 +1,115 @@
+function makeAlert(id, mess){ //얼럿
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		showCancelButton: false,   
+		confirmButtonColor: "#840B55",   
+		confirmButtonText: "확인",   
+		closeOnConfirm: false,   
+		closeOnCancel: false 
+		}, 
+		function(isConfirm){
+		if (isConfirm) {				     	     
+		swal.close();
+		$("#"+id).focus();
+		} 
+	});
+}
+
+function makeAlertReload(id, mess){ //얼럿후 확인후 리로딩
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		showCancelButton: false,   
+		confirmButtonColor: "#840B55",   
+		confirmButtonText: "확인",   
+		closeOnConfirm: false,   
+		closeOnCancel: false 
+		}, 
+		function(isConfirm){
+		if (isConfirm) {			
+			swal.close();			
+			$("#"+id).focus();
+			location.reload();
+		} 
+	});
+}
+
+function makeAlertRedirect(id, mess, url){ //얼럿후 확인 리다이렉트
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		showCancelButton: false,   
+		confirmButtonColor: "#840B55",   
+		confirmButtonText: "확인",   
+		closeOnConfirm: false,   
+		closeOnCancel: false 
+		}, 
+		function(isConfirm){
+		if (isConfirm) {			
+			swal.close();			
+			$("#"+id).focus();
+			location.href = url;
+		} 
+	});
+}
+
+function makeAlertReviewFunc( mess){ //얼럿후 펑션 호출	
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		showCancelButton: false,   
+		confirmButtonColor: "#840B55",   
+		confirmButtonText: "확인",   
+		closeOnConfirm: false,   
+		closeOnCancel: false 
+		}, 
+		function(isConfirm){
+		if (isConfirm) {
+			reviewList();
+			swal.close();
+		} 
+	});	
+}
+
+function makeAlertGoList( mess){ //얼럿후 펑션 호출	
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		showCancelButton: false,   
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "확인",   
+		closeOnConfirm: false,   
+		closeOnCancel: false 
+		}, 
+		function(isConfirm){
+		if (isConfirm) {
+			goList();
+			swal.close();
+		} 
+	});	
+}
+
+
+
+function makeDelFun(mess, fun){ //공통 삭제
+	swal({  
+		title: "",   
+		text: mess,   
+		type: "warning",   
+		 closeOnConfirm: false,   
+		 showLoaderOnConfirm: true,
+		showCancelButton: true
+		}, 
+		function(isConfirm){
+		if (isConfirm) {
+			fun();			
+			//swal.close();
+		} 
+	});
+}

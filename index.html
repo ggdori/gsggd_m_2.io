@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://serial.womanizer.io/m/ -->
+<html lang="ko" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+	<link href="./serial.womanizer.io.m_files/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
+	<link href="./serial.womanizer.io.m_files/sweetalert.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<style>
+	* { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
+		.before {font-size:18px;height:50px;margin-top:50px;width:298px;border:1px solid #111111;padding: 7px;border-radius: 4px;background-color:#111111;color:#FFFFFF;cursor:pointer;}
+		.after {font-size:18px;color:#ffffff;height:50px;margin-top:50px;width:298px;border:1px solid #111111;padding: 7px;border-radius: 4px;background-color: #840B55;cursor:pointer;}
+		input::placeholder {
+			color: #BABABA;
+		}
+		input, textarea, button, select {-webkit-appearance:none; -moz-appearance:none; appearance:none;}
+		input, textarea, button, select {-webkit-border-radius:0; -moz-border-radius:0; -o-border-radius:0; border-radius:0;}
+
+		</style>
+	<script type="text/javascript" src="./serial.womanizer.io.m_files/jquery-1.11.2.min.js.다운로드"></script>
+	<script type="text/javascript" src="./serial.womanizer.io.m_files/plugins.min.js.다운로드"></script>
+	<script type="text/javascript" src="./serial.womanizer.io.m_files/sweetalert.min.js.다운로드"></script>
+	<script type="text/javascript" src="./serial.womanizer.io.m_files/common.js.다운로드"></script>
+	<script type="text/javascript">
+
+	/*Show entries on click hide*/
+	$(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
+
+	function goTooltip(){
+		if($('.tool').is(":visible")){
+			$('.tool').hide();
+		}else {
+			$('.tool').show();
+		}
+	}
+
+	</script>
+<script>
+function proc(){
+	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	if($("#brand_nm").val() == ""){
+		makeAlert('brand_nm', '브랜드명을 입력해주세요.');
+		return;
+	}if($("#serial_number").val() == ""){
+		makeAlert('serial_number', '시리얼 번호를 입력해주세요.');
+		return;
+	}else if($("#purchase_place").val() == ""){
+		makeAlert('purchase_place', '구입처를 입력해주세요.');
+		return;
+	}else if($("#email").val() == ""){
+		makeAlert('email', '이메일을 입력해주세요.');
+		return;
+	}else if(!regEmail.test($("#email").val())){
+		makeAlert('email', '이메일이 형식이 올바르지 않습니다.');
+		return;
+	}
+
+	var params = jQuery("#frm").serialize();
+	var form = $('form')[0];
+	var formData = new FormData(form);
+
+	if(confirm("등록하시겠습니까?")){
+		$('.loaded').attr('class', 'load'); //중복등록 방지 로딩
+		$.ajax({
+			url: '../procAjax.php',
+			type: 'POST',
+			data:params,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			dataType: 'text',
+			success: function (data) {
+				if(data.trim() != ""){
+					var dataArr = data.split("|");
+					if(dataArr[0] == "S"){
+						makeAlertRedirect('', dataArr[1], '/m/index.php');
+					}else {
+						makeAlert('', dataArr[1]);
+						return;
+					}
+				}
+			}
+		});
+	}
+}
+function check() {
+	if ($("#serial_number").val() != "" && $("#purchase_place").val() != "" && $("#email").val() != ""){
+		$("#c_button").addClass("after");
+		$("#c_button").removeClass("before");
+	}else {
+		$("#c_button").addClass("before");
+		$("#c_button").removeClass("after");
+	}
+}
+
+</script>
+</head><body class="loaded">
+<div id="main" style="margin-top:50px;margin-left:30px;margin-right:30px;">
+	<div style="width:100%;">
+		<center>
+		<div style="display:flex; justify-content:center; width:100%; height:60px; background-color : #00623f; border-radius:30px 30px 30px 30px/ 30px 30px 30px 30px;">
+			<div style="text-align:center; height: 60px; line-height: 60px; font-weight:800; font-size:24px;color:#ffffff;">
+				(주)그린쉘프 정품등록 안내
+			</div>
+		</div>
+		<div style="margin-top:50px;text-align:left;line-height:170%;width:100%;font-weight:300;font-size:13px;color:#111111;">
+			<div>
+				<div style="">
+					한국 공식 수입업체 그린쉘프의 제품을 구매해주셔서 감사합니다.&nbsp;
+					절차에 따라 정품 등록을 하시면 A/S 서비스를 받을 수 있습니다.
+				</div>
+				<div style="margin-top: 20px;">
+					정품 등록에 필요한 시리얼이 패키지에 있으니, <span style="font-weight : 600;">정품 등록 완료 전에
+					패키지를 버리지 마세요.&nbsp;</span> 또한, 공식 수입 제품이 아닌 <span style="font-weight : 600;">병행 수입, 
+					직구 제품은 정품 등록이 불가능</span>합니다.
+				</div>
+				<div style="margin-top: 20px;">
+					정품 등록을 하지 않은 경우에는 <span style="font-weight : 600;">A/S서비스가 불가능</span>합니다.
+				</div>
+				<hr style="margin-top:60px;background-color:#a0a0a0;height:1px;">
+				<div style="margin-top: 40px;">
+					<div style="text-align:center;width:100%;font-weight:400;font-size:31px;color:#111111;">
+						정품등록 절차
+					</div>
+					<div style="margin-top: 30px;">
+						1. 하단에 ‘제품별 시리얼 번호 위치 안내’를 참고하여, 구입한 제품의 시리얼 번호를 찾는다.<br>
+						<p></p>
+						2. 최하단 ‘제품등록’란에 브랜드명, 시리얼 번호, 구입일자, 구입처, 이메일을 기입한 후 입력완료 버튼을 누른다.
+					</div>
+				</div>
+				<hr style="margin-top:60px;background-color:#A0A0A0;height:1px;">
+				<div style="margin-top: 40px;">
+					<div style="text-align:center;width:100%;font-weight:400;font-size:31px;color:#111111;">
+						시리얼 번호 위치 안내
+					</div>
+					<div style="margin-top: 40px;">
+						<div>
+							<div>
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_wmz_mb.png" alt="">
+							</div>
+							<div style="margin-top: 20px;">
+								<div style="font-size: 28px;">우머나이저</div>
+								<div style="margin-top: 12px;">
+									제품 박스 하단에 보시면 사진과 같이 금박 스티커가 있습니다.&nbsp;
+									금박 스티커에 있는 바코드 하단에 영문 알파벳과 숫자로 조합된
+									부분이 시리얼 번호입니다.
+								</div>
+							</div>
+						</div>
+						<div style="height: 40px;"></div>
+						<div>
+							<div>
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_rmp_1_mb.png" alt="">
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_rmp_2_mb.png" alt="">
+							</div>
+							<div style="margin-top: 20px;">
+								<div style="font-size: 28px;">롬프</div>
+								<div style="margin-top: 12px;">
+									제품 박스 하단에 바코드가 있습니다.&nbsp;
+									그 중 사진과 같이 영문 알파벳과 숫자로 조합된 부분이 시리얼 번호입니다. 
+								</div>
+							</div>
+						</div>
+						<div style="height: 40px;"></div>
+						<div>
+							<div>
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_wvi_1_mb.png" alt="">
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_wvi_2_mb.png" alt="">
+							</div>
+							<div style="margin-top: 20px;">
+								<div style="font-size: 28px;">위바이브</div>
+								<div style="margin-top: 12px;">
+									제품 박스 측면 혹은 하단에 보시면 사진과 같이 바코드가 있습니다.&nbsp;
+									그 중 첫 번째 사진과 같이  8개의 숫자로 된 부분, 혹은 두 번째 사진과
+									같이 SN 뒤 알파벳과 숫자로 조합된 부분이 시리얼 번호입니다.  
+								</div>
+							</div>
+						</div>
+						<div style="height: 40px;"></div>
+						<div>
+							<div>
+								<img style="width : 100%;" src="./serial.womanizer.io.m_files/img_arc_mb.png" alt="">
+							</div>
+							<div style="margin-top: 20px;">
+								<div style="font-size: 28px;">아크웨이브</div>
+								<div style="margin-top: 12px;">
+									제품 박스 하단 혹은 측면에 보시면 그림과 같은 바코드가 있습니다.&nbsp;
+									그 중 알파벳과 숫자로 조합된 부분이 시리얼 번호입니다.
+								</div>
+							</div>
+						</div>
+						<div style="height: 40px;"></div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<hr style="margin-top:30px;background-color:#a0a0a0;height:1px;">
+		<div style="margin-top:30px;text-align:center;width:100%;font-weight:300;font-size:31px;color:#111111;">
+			제품 등록
+		</div>
+		<form name="frm" id="frm" method="post">
+			<input type="hidden" id="purchase_dt" name="purchase_dt">
+
+			<div style="margin-top:30px;text-align:left;width:100%;font-weight:300;font-size:14px;color:#707070;">
+				<div style="width:100%">
+					<div style="color: #111111;">브랜드명</div>
+					<div>
+						<select id="brand_nm" name="brand_nm" style="font-size:14px;background-color:#FFFFFF;color:#a0a0a0;height:50px;margin-top:10px;width:99%;border:1px solid #111111;padding: 7px;border-radius: 4px;">
+							<option value="">브랜드명</option>
+														<option value="Womanizer">Womanizer</option>
+														<option value="ROMP">ROMP</option>
+														<option value="ARCWAVE">ARCWAVE</option>
+														<option value="WEVIBE">WEVIBE</option>
+													</select>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-top:30px;text-align:left;width:100%;font-weight:300;font-size:14px;color:#707070;">
+			<div style="width:100%">
+				<div style="color: #111111;">시리얼 번호&nbsp; <img align="absmiddle" src="./serial.womanizer.io.m_files/q_mark.png" style="cursor:pointer;" onclick="goTooltip();"></div>
+				<div><input type="text" id="serial_number" onkeyup="check();" placeholder="ex. Q10000" name="serial_number" style="font-weight:700;color:#a0a0a0;height:35px;font-size:14px;margin-top:10px;width:94%;border:1px solid #111111;padding: 7px;border-radius: 4px;"></div>
+				<div class="tool" style="position:absolute;display:none;"><img src="./serial.womanizer.io.m_files/tools.png"></div>
+			</div>
+			<div style="margin-top:30px;width:100%">
+				<div style="color: #111111;">구입일자</div>
+				<div>
+					<select id="purchase_y" name="purchase_y" style="font-size:14px;background-color:#FFFFFF;color:#a0a0a0;height:50px;margin-top:10px;width:37%;border:1px solid #111111;padding: 7px;border-radius: 4px;">
+						<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022" selected="">2022</option>
+<option value="2021">2023</option>
+<option value="2021">2024</option>
+<option value="2021">2025</option>
+<option value="2021">2026</option>
+					</select>
+					<select id="purchase_m" name="purchase_m" style="font-size:14px;background-color:#FFFFFF;color:#a0a0a0;height:50px;margin-top:10px;width:30%;border:1px solid #111111;padding: 7px;border-radius: 4px;">
+						<option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04" selected="">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+					</select>
+					<select id="purchase_d" name="purchase_d" style="font-size:14px;background-color:#FFFFFF;color:#a0a0a0;height:50px;margin-top:10px;width:30%;border:1px solid #111111;padding: 7px;border-radius: 4px;">
+						<option value="01" selected="">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top:30px;text-align:left;width:100%;font-weight:300;font-size:14px;color:#707070;">
+			<div style="width:100%">
+				<div style="color: #111111;">구입처</div>
+				<div><input type="text" id="purchase_place" onkeyup="check();" placeholder="구입한 온/오프라인샵 이름을 입력해주세요." name="purchase_place" style="color:#a0a0a0;height:35px;font-size:14px;margin-top:10px;width:94%;border:1px solid #111111;padding: 7px;border-radius: 4px;"></div>
+			</div>
+			<div style="margin-top:30px;width:100%">
+				<div style="color: #111111;">이메일</div>
+				<div><input type="text" id="email" onkeyup="check();" placeholder="ex. womanizer@womanizer.co.kr" name="email" style="font-size:14px;color:#a0a0a0;height:35px;margin-top:10px;width:94%;border:1px solid #111111;padding: 7px;border-radius: 4px;"></div>
+			</div>
+		</div>
+		</form>
+		<div style="margin-top:30px;width:100%"><button onclick="proc()" id="c_button" class="before">입력완료</button></div>
+		</center>
+	</div>
+</div>
+<br><br><br>
+<div style="height:270px;background-color:#111111;">
+	<div style="margin-left:20px;padding-top:40px;">
+		<img src="./serial.womanizer.io.m_files/grsf_logo.png" width="150" style="">
+		<span style="float:right;">
+		<a href="https://www.instagram.com/heywonder_official/" target="_blank"><img src="./serial.womanizer.io.m_files/foo_instagram.png" width="20" style="margin-right:2px;"></a>
+		<a href="https://www.youtube.com/channel/UCwawwB8rbNNX4Qrq9H9KZNw" target="_blank"><img src="./serial.womanizer.io.m_files/foo_youtube.png" width="20" style="margin-right:2px;"></a>
+		<a href="http://wopasa.com/" target="_blank"><img src="./serial.womanizer.io.m_files/foo_wopasa.png" width="20" style="margin-right:10px;"></a>
+		</span>
+	</div>
+	<div class="about" style="margin-top:40px;margin-left:20px;float:left;font-weight:300;font-size:11px;font-family: &#39;Spoqa Han Sans&#39;, &#39;Spoqa Han Sans JP&#39;, &#39;Sans-serif&#39;;color:#FBFAFA">
+		<b>회사명 </b>주식회사 그린쉘프 &nbsp;|&nbsp; <b>대표 </b> 강인원
+		<br>
+		<b>사업자등록번호 </b> 820-86-00878
+		<br><b>통신판매업 신고번호 </b> 2019-서울강서-2212
+		<br>
+		<b>주소 </b>서울시 강서구 강서로 466, 우리벤처타운 11층 1104호 그린쉘프
+		<br>
+		<b>전화번호 </b> 070-4115-0114 &nbsp;|&nbsp; <b>개인정보관리 책임자 </b> 이상훈<b>
+		<br><br>
+		copyright ⓒ 2022 by Greenshelf.
+	</b></div><b>
+</b></div><b>
+
+
+</b></body></html>
